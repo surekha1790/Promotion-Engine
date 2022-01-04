@@ -1,4 +1,4 @@
-package org.promotion.enging.test.model;
+package org.promotion.engine.model;
 
 
 public class Sku {

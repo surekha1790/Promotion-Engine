@@ -1,6 +1,6 @@
-package org.promotion.enging.test.repository;
+package org.promotion.engine.repository;
 
-import org.promotion.enging.test.model.Sku;
+import org.promotion.engine.model.Sku;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,15 +17,18 @@ public class SkuPricesRepo {
        skusUnitPrices.put('D', 15);
 
    }
-
+    public int getSkuUnitPrice(char skuId){
+        return skusUnitPrices.get(skuId);
+    }
     public Map<Character, Integer> getSkusUnitPrices(){
         return skusUnitPrices;
     }
 
-    public void updateSingleSkuUnitPrice(char skuId, int price){
+    public void addOrUpdateSingleSkuUnitPrice(char skuId, int price){
        skusUnitPrices.put(skuId, price);
     }
-    public void updateMultipleSkuUnitPrices(List<Sku> skusToUpdate){
-       skusToUpdate.forEach(sku-> skusUnitPrices.put(sku.getSkuId(),sku.getPrice()));
+    public void addOrUpdateMultipleSkuUnitPrices(List<Sku> skusToUpdate){
+       skusToUpdate.forEach(sku-> skusUnitPrices.put(sku.getSkuId(), sku.getPrice()));
+
     }
 }
