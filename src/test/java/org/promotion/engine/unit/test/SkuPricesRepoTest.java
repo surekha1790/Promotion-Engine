@@ -32,5 +32,29 @@ public class SkuPricesRepoTest {
         assertEquals(20, (int)skuPricesRepo.getSkusUnitPrices().get(skuId));
     }
 
+    @Test
+    public void testAddOrUpdateMultipleSkuUnitPrices_updateShouldSuccess(){
+        char newSku = 'E';
+        List<Sku> skusToAddOrUpdate = new ArrayList<>();
+        Sku sku = new Sku(newSku, 20);
+        skusToAddOrUpdate.add(sku);
+        Sku sku2 = new Sku(Constants.SKU_B, 35);
+        skusToAddOrUpdate.add(sku2);
 
+        skuPricesRepo.addOrUpdateMultipleSkuUnitPrices(skusToAddOrUpdate);
+        Map<Character, Integer> skuPrices = skuPricesRepo.getSkusUnitPrices();
+        assertNotNull(skuPrices.get(newSku));
+        assertEquals(35, (int)skuPricesRepo.getSkusUnitPrices().get(Constants.SKU_B));
+    }
+
+    @Test
+    public void testDeleteSkuUnitPrice_deleteShouldSuccess(){
+        char skuId = 'N';
+        skuPricesRepo.addOrUpdateSingleSkuUnitPrice(skuId, 10);
+        Map<Character, Integer> skuPrices = skuPricesRepo.getSkusUnitPrices();
+        assertNotNull(skuPrices.get(skuId));
+
+        skuPricesRepo.deleteSkuUnitPrice(skuId);
+        assertNull(skuPrices.get(skuId));
+    }
 }
