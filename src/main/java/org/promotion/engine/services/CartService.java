@@ -86,6 +86,10 @@ public  class CartService {
         }
     }
 
+    public List<Order> getCartItems(){
+        return orders;
+    }
+
     public static void main(String[] args) {
         CartService cartService = new CartService();
         //Scenario A
